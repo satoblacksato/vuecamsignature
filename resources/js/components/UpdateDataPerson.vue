@@ -48,7 +48,11 @@
 
                   let rst= this.$refs.signaturePad.saveSignature();
                   let avatar=this.$refs.webcam.getPhoto();
-                  if(rst.isEmpty || avatar==null){
+                  if(avatar==null){
+                      alert("Debes capturar una foto");
+                      return true;
+                  }
+                    if(rst.isEmpty ){
                       alert("Debes poner tu firma antes de continuar");
                       return true;
                   }
