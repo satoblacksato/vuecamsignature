@@ -1796,11 +1796,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_webcam__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-webcam */ "./node_modules/vue-webcam/VueWebcam.js");
-/* harmony import */ var vue_webcam__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_webcam__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_html5_camera__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-html5-camera */ "./node_modules/vue-html5-camera/src/Camera.vue");
 /* harmony import */ var vue_signature_pad__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-signature-pad */ "./node_modules/vue-signature-pad/dist/vue-signature-pad.esm.js");
-//
-//
 //
 //
 //
@@ -1836,7 +1833,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UpdateDataPerson",
   components: {
-    VueWebcam: vue_webcam__WEBPACK_IMPORTED_MODULE_0___default.a,
+    VueCam: vue_html5_camera__WEBPACK_IMPORTED_MODULE_0__["default"],
     VueSignaturePad: vue_signature_pad__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
@@ -1845,9 +1842,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     takeData: function takeData() {
       var rst = this.$refs.signaturePad.saveSignature();
-      var avatar = this.$refs.webcam.getPhoto();
+      var avatar = this.$refs.camera.click();
 
-      if (rst.isEmpty || avatar == null) {
+      if (avatar == null) {
+        alert("Debes capturar una foto");
+        return true;
+      }
+
+      if (rst.isEmpty) {
         alert("Debes poner tu firma antes de continuar");
         return true;
       }
@@ -1868,7 +1870,7 @@ __webpack_require__.r(__webpack_exports__);
     undo: function undo() {
       this.$refs.signaturePad.undoSignature();
     },
-    dataURLtoFile: function dataURLtoFile(dataurl, filename) {
+    dataURLtoFile: function dataURLtoFile(dataurl) {
       var arr = dataurl.split(',');
       var mime = arr[0].match(/:(.*?);/)[1];
       var bstr = atob(arr[1]);
@@ -1880,7 +1882,7 @@ __webpack_require__.r(__webpack_exports__);
         n -= 1;
       }
 
-      return new File([u8arr], filename, {
+      return new File([u8arr], 'img.png', {
         type: mime
       });
     }
@@ -5843,6 +5845,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#cameraCanvas[data-v-b3cef74e] {\n  display: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UpdateDataPerson.vue?vue&type=style&index=0&id=0094abb3&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UpdateDataPerson.vue?vue&type=style&index=0&id=0094abb3&scoped=true&lang=css& ***!
@@ -5855,7 +5876,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -37153,6 +37174,36 @@ SignaturePad.prototype.toData = function () {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../vue-loader/lib/loaders/stylePostLoader.js!../../postcss-loader/src??ref--6-2!../../vue-loader/lib??vue-loader-options!./Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UpdateDataPerson.vue?vue&type=style&index=0&id=0094abb3&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UpdateDataPerson.vue?vue&type=style&index=0&id=0094abb3&scoped=true&lang=css& ***!
@@ -37767,6 +37818,206 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-html5-camera/src/Camera.vue":
+/*!******************************************************!*\
+  !*** ./node_modules/vue-html5-camera/src/Camera.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Camera.vue?vue&type=template&id=b3cef74e&scoped=true& */ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true&");
+/* harmony import */ var _Camera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Camera.vue?vue&type=script&lang=js& */ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& */ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&");
+/* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Camera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "b3cef74e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "node_modules/vue-html5-camera/src/Camera.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib??vue-loader-options!./Camera.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../style-loader!../../css-loader??ref--6-1!../../vue-loader/lib/loaders/stylePostLoader.js!../../postcss-loader/src??ref--6-2!../../vue-loader/lib??vue-loader-options!./Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=style&index=0&id=b3cef74e&scoped=true&lang=css&");
+/* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_style_index_0_id_b3cef74e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../vue-loader/lib??vue-loader-options!./Camera.vue?vue&type=template&id=b3cef74e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_Camera_vue_vue_type_template_id_b3cef74e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: () => {
+    return {
+      img: "Hello"
+    };
+  },
+  props: ["width", "height", "facingMode"],
+  mounted() {
+    this.updateFeed();
+  },
+  computed: {
+    everything() {
+      return this.width, this.height, this.facingMode;
+    }
+  },
+  watch: {
+    everything() {
+      this.updateFeed();
+    }
+  },
+  methods: {
+    updateFeed() {
+      const constraints = {
+        audio: false,
+        video: {
+          facingMode: this.facingMode || "user"
+        }
+      };
+      if (this.width) this.$refs.cameraVideo.style.width = this.width + "px";
+      if (this.height) this.$refs.cameraVideo.style.height = this.height + "px";
+      this.$refs.cameraVideo.setAttribute("autoplay", "");
+      this.$refs.cameraVideo.setAttribute("muted", "");
+      this.$refs.cameraVideo.setAttribute("playsinline", "");
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(mediaStream => {
+          this.$refs.cameraVideo.srcObject = mediaStream;
+          this.$refs.cameraVideo.addEventListener("loadedmetadata", () => {
+            this.$refs.cameraVideo.play();
+          });
+        })
+        .catch(error => {
+          console.log("Error", error);
+        });
+    },
+    click() {
+      this.$refs.cameraCanvas.width = this.$refs.cameraVideo.offsetWidth;
+      this.$refs.cameraCanvas.height = this.$refs.cameraVideo.offsetHeight;
+      this.$refs.cameraCanvas
+        .getContext("2d")
+        .drawImage(
+          this.$refs.cameraVideo,
+          0,
+          0,
+          this.$refs.cameraCanvas.width,
+          this.$refs.cameraCanvas.height
+        );
+      return this.$refs.cameraCanvas.toDataURL();
+    }
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-html5-camera/src/Camera.vue?vue&type=template&id=b3cef74e&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("video", { ref: "cameraVideo", attrs: { playsinline: "" } }),
+    _vm._v(" "),
+    _c("canvas", {
+      ref: "cameraCanvas",
+      attrs: { id: "cameraCanvas", "aria-hidden": "true" }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -37855,7 +38106,12 @@ var render = function() {
         _c(
           "div",
           { staticClass: "col-lg-5" },
-          [_c("vue-webcam", { ref: "webcam" })],
+          [
+            _c("vue-cam", {
+              ref: "camera",
+              attrs: { width: "300", height: "300" }
+            })
+          ],
           1
         )
       ]),
@@ -38244,133 +38500,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (VueSignaturePad);
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-webcam/VueWebcam.js":
-/*!**********************************************!*\
-  !*** ./node_modules/vue-webcam/VueWebcam.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// TODO:
-// 1. Enable mirror option
-// 2. Improve options handling
-// 3. Error handling
-
-const Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
-const WebcamComponent = Vue.extend({
-    render: function (h) {
-        return h('video', {
-            ref: 'video',
-            attrs: {
-                width: this.width,
-                height: this.height,
-                src: this.src,
-                autoplay: this.autoplay
-            }
-        });
-    },
-    props: {
-        autoplay: {
-            type: Boolean,
-            default: true
-        },
-        width: {
-            type: Number,
-            default: 400
-        },
-        height: {
-            type: Number,
-            default: 300
-        },
-        mirror: {
-            type: Boolean,
-            default: true
-        },
-        screenshotFormat: {
-            type: String,
-            default: 'image/jpeg'
-        }
-    },
-    data () {
-        return {
-            video: '',
-            src: '',
-            stream: '',
-            hasUserMedia: false,
-            styleObject: {
-                transform: 'scale(-1, 1)',
-                filter: 'FlipH'
-            }
-        };
-    },
-    methods: {
-        getPhoto () {
-            if (!this.hasUserMedia) return null;
-
-            const canvas = this.getCanvas();
-            return canvas.toDataURL(this.screenshotFormat);
-        },
-        getCanvas () {
-            if (!this.hasUserMedia) return null;
-
-            const video = this.$refs.video;
-            if (!this.ctx) {
-                const canvas = document.createElement('canvas');
-                canvas.height = video.clientHeight;
-                canvas.width = video.clientWidth;
-                this.canvas = canvas;
-
-                this.ctx = canvas.getContext('2d');
-
-                /*if (this.mirror) {
-                    const context = canvas.getContext('2d');
-                    context.translate(canvas.width, 0);
-                    context.scale(-1, 1);
-                    this.ctx = context;
-                } else {
-                    this.ctx = canvas.getContext('2d');
-                }*/
-            }
-
-            const { ctx, canvas } = this;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            return canvas;
-        }
-
-    },
-    mounted: function () {
-        this.video = this.$refs.video;
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-        if (navigator.getUserMedia) {
-            navigator.getUserMedia({ video: true }, (stream) => {
-                this.src = window.URL.createObjectURL(stream);
-                this.stream = stream;
-                this.hasUserMedia = true;
-            }, (error) => {
-                console.log(error);
-            });
-        }
-    },
-    beforeDestroy: function () {
-        this.video.pause();
-        this.src = '';
-        this.stream.getTracks()[0].stop();
-    },
-    destroyed: function () {
-        console.log('Destroyed');
-    }
-});
-
-const VueWebcam = Vue.component('vue-webcam', WebcamComponent);
-
-module.exports = VueWebcam;
 
 
 /***/ }),
@@ -49844,8 +49973,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/vueCamSignatureLaravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/vueCamSignatureLaravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\vuecamsignature\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\vuecamsignature\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

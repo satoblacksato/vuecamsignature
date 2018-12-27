@@ -17,9 +17,7 @@
 
                             </div>
                             <div class="col-lg-5">
-                                <vue-webcam ref='webcam'></vue-webcam>
-
-
+                                <vue-cam ref="camera" width="300" height="300" />
                             </div>
                         </div>
                         <div class="row">
@@ -32,12 +30,13 @@
 </template>
 <script>
 
-    import VueWebcam from 'vue-webcam';
+    import VueCam from "vue-html5-camera"
+    
     import VueSignaturePad from 'vue-signature-pad';
 
     export default {
         name: "UpdateDataPerson",
-        components: { VueWebcam,VueSignaturePad },
+        components: { VueCam,VueSignaturePad },
         data () {
             return {
 
@@ -47,7 +46,7 @@
             takeData () {
 
                   let rst= this.$refs.signaturePad.saveSignature();
-                  let avatar=this.$refs.webcam.getPhoto();
+                  let avatar=this.$refs.camera.click();
                   if(avatar==null){
                       alert("Debes capturar una foto");
                       return true;

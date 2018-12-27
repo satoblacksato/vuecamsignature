@@ -20,10 +20,10 @@
                         <h3>DATOS EXISTENTES</h3>
                     <div class="row">
                         <div class="col-lg-6">
-                            <img src="/user-avatar/{{$user->id}}">
+                            <img src="data:image/png;base64,{{$user->avatar}}">
                         </div>
                         <div class="col-lg-6">
-                            <img src="/user-signature/{{$user->id}}">
+                            <img src="data:image/png;base64,{{$user->signature}}">
                         </div>
                     </div>
                 </div>

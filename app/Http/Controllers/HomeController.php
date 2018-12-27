@@ -33,16 +33,13 @@ class HomeController extends Controller
      */
     public function saveData(Request $request){
         $this->validate($request,['avatar'=>'required|image','signature'=>'required|image']);
-        $user=auth()->user();
 
+        $user=auth()->user();
         $avatar = $request->file('avatar');
         $signature= $request->file('signature');
-
-
-
-        $user->avatar= $avatar->openFile()->fread($avatar->getSize());
-        $user->signature= $signature->openFile()->fread($signature->getSize());
-        $user->save();
+        $user->avatar=  base64_encode(file_get_contents($avatar));//$avatar->openFile()->fread($avatar->getSize());
+        $user->signature=  base64_encode(file_get_contents($signature));//$signature->openFile()->fread($signature->getSize());
+       $user->save();
         return response()->json('PROCESO OK');
     }
 }
